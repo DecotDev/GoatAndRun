@@ -206,7 +206,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         if(invulnerability > 0.f && (int)(invulnerability/0.125f)%2 == 0)
             return;
 
-        batch.draw(currentFrame, getX() - getWidth()*0.5f - map.scrollX - (lookLeft ? 28 : 50), getY() - getHeight()*0.5f, 128, 128, 0, 0, 669, 569, lookLeft, true);
+        batch.draw(currentFrame, getX() - getWidth()*0.5f - map.scrollX - (lookLeft ? 28 : 50), getY() - getHeight()*0.5f, 128, 128, 0, 0, 24, 24, lookLeft, true);
     }
 
     // Draw collision box
