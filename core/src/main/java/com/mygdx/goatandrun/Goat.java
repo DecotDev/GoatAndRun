@@ -25,6 +25,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
 
     public Goat(AssetManager manager)
     {
+        //setSize(120, 120);
         setBounds(400,40,48, 112);
         this.manager = manager;
         currentFrame = manager.get("goat/Idle (1).png", Texture.class);
@@ -75,13 +76,13 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                     float base_impulse = -JUMP_IMPULSE;
                     float current_impulse = -speed.y;
                     animationFrame = 0 + ((base_impulse - current_impulse) / 32);
-                    if (animationFrame > 8) animationFrame = 8;
+                    if (animationFrame > 0) animationFrame = 0;
                 }
                 else
                 {
                     // Start falling
-                    animationFrame = 9 + (speed.y / 64);
-                    if (animationFrame > 2) animationFrame = 2;
+                    animationFrame = 2 + (speed.y / 64);
+                    if (animationFrame > 1) animationFrame = 1;
                 }
                 currentFrame = manager.get("goat/Jump ("+(int)(animationFrame+1)+").png", Texture.class);
 

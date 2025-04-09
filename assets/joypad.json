@@ -1,0 +1,40 @@
+{
+  "buttons" : [
+    {
+      x: 700
+      y: 40
+      width: 80
+      height: 80,
+      action: Pause
+      image_on: "gui/Pause-on.png",
+      image_off: "gui/Pause-off.png"
+    },
+    {
+      x: 40
+      y: 360
+      width: 80
+      height: 80,
+      action: Left
+      image_on: "gui/Left-on.png",
+      image_off: "gui/Left-off.png"
+    },
+    {
+      x: 160
+      y: 360
+      width: 80
+      height: 80
+      action: Right
+      image_on: "gui/Right-on.png",
+      image_off: "gui/Right-off.png"
+    },
+    {
+      x: 660
+      y: 360
+      width: 80
+      height: 80
+      action: Jump
+      image_on: "gui/Jump-on.png",
+      image_off: "gui/Jump-off.png"
+    }
+  ]
+}
