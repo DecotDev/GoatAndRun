@@ -23,6 +23,7 @@ public class RunningAnimal extends GameEntity {
 
         int nearestFloor1 = map.nearestFloor((int)(getX() - getWidth()/2), (int)getY());
         int nearestFloor2 = map.nearestFloor((int)(getX() + getWidth()/2), (int)getY());
+        int nearestFloor3 = map.nearestFloor((int)(getX() + 0), (int)getY());
 
         if(falling)
         {
@@ -35,6 +36,10 @@ public class RunningAnimal extends GameEntity {
                     falling = false;
                     speed.y = 0;
                     setY(nearestFloor2 - getHeight() / 2);
+                } else if (nearestFloor3 <= getY() + getHeight() / 2 && speed.y > 0) {
+                    falling = false;
+                    speed.y = 0;
+                    setY(nearestFloor3 - getHeight() / 2);
                 }
                 else
                 {
@@ -46,8 +51,9 @@ public class RunningAnimal extends GameEntity {
             {
                 int nearestCeiling1 = map.nearestCeiling((int)(getX() - getWidth()/2), (int)getY());
                 int nearestCeiling2 = map.nearestCeiling((int)(getX() + getWidth()/2), (int)getY());
+                int nearestCeiling3 = map.nearestCeiling((int)(getX() + 0), (int)getY());
 
-                if(nearestCeiling1 > getY() - getHeight()/2 || nearestCeiling2 > getY() - getHeight()/2)
+                if(nearestCeiling1 > getY() - getHeight()/2 || nearestCeiling2 > getY() - getHeight()/2 || nearestCeiling3 > getY() - getHeight()/2)
                 {
                     speed.y = -speed.y;
                 }
@@ -65,7 +71,7 @@ public class RunningAnimal extends GameEntity {
         }
         else
         {
-            if(nearestFloor1 > getY() + (getHeight() / 2) && nearestFloor2 > getY() + (getHeight() / 2))
+            if(nearestFloor1 > getY() + (getHeight() / 2) && nearestFloor2 > getY() + (getHeight() / 2) &&  nearestFloor3 > getY() + (getHeight() / 2))
             {
                 falling = true;
             }
@@ -73,7 +79,8 @@ public class RunningAnimal extends GameEntity {
 
         if(     speed.x > 0 && (
             map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() - getHeight()*0.25f)) ||
-                map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.25f))
+                map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.25f)) ||
+                    map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() + 0))
         )
         )
         {
@@ -81,7 +88,8 @@ public class RunningAnimal extends GameEntity {
         }
         if(     speed.x < 0 && (
             map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() - getHeight()*0.25f)) ||
-                map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.25f))
+                map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.25f)) ||
+                    map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() + 0))
         )
         )
         {

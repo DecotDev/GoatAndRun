@@ -9,10 +9,14 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     static final float JUMP_IMPULSE = -600f;
-    static final float RUN_SPEED = 240f;
-    static final float BRAKE_SPEED = 120f;
-    static final float STOP_SPEED = 5f;
-    static final float RUN_ACCELERATION = 200f;
+    static final float RUN_SPEED = 300f;
+    static final float AIR_RUN_SPEED = 220f;
+    static final float BRAKE_SPEED = 1500f;
+    static final float AIR_BRAKE_SPEED = 380f;
+    static final float STOP_SPEED = 50f;
+    static final float AIR_STOP_SPEED = 60f;
+    static final float RUN_ACCELERATION = 1800f;
+    static final float AIR_RUN_ACCELERATION = 600f;
     static final float INVULNERABILITY_DURATION = 20f;
 
     AssetManager manager;
@@ -26,7 +30,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     public Goat(AssetManager manager)
     {
         //setSize(120, 120);
-        setBounds(400,40,48, 112);
+        setBounds(400,160,72, 104);
         this.manager = manager;
         currentFrame = manager.get("goat/Idle (1).png", Texture.class);
         invulnerability = 0.f;
@@ -85,6 +89,60 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                     if (animationFrame > 1) animationFrame = 1;
                 }
                 currentFrame = manager.get("goat/Jump ("+(int)(animationFrame+1)+").png", Texture.class);
+
+                //Air control
+                if (joypad.isPressed("Right"))
+                {
+                    // Accelerate right
+                    lookLeft = false;
+                    speed.x += AIR_RUN_ACCELERATION * delta;
+                    if (speed.x > AIR_RUN_SPEED) {
+                        if (speed.x > RUN_SPEED) {
+                            speed.x = RUN_SPEED;
+                        } else {
+                            speed.x = AIR_RUN_SPEED;
+                        }
+                    }
+                }
+                else if (joypad.isPressed("Left"))
+                {
+                    // Accelerate left
+                    lookLeft = true;
+                    speed.x -= AIR_RUN_ACCELERATION * delta;
+                    if (speed.x < -AIR_RUN_SPEED) {
+                        if (speed.x < -RUN_SPEED) {
+                            speed.x = -RUN_SPEED;
+                        } else {
+                            speed.x = -AIR_RUN_SPEED;
+                        }
+                    }
+                }
+
+                // If not left or right input, reduce speed.x
+                else {
+                    // Reduce speed and stop
+                    if(speed.x < 0f)
+                    {
+                        if(speed.x < -AIR_STOP_SPEED) {
+                            speed.x += delta * AIR_BRAKE_SPEED;
+                        }
+                        else
+                        {
+                            speed.x = 0f;
+                        }
+                    }
+                    else if (speed.x > 0f)
+                    {
+                        if(speed.x > AIR_STOP_SPEED) {
+                            speed.x -= delta * AIR_BRAKE_SPEED;
+                        }
+                        else
+                        {
+                            speed.x = 0f;
+                        }
+                    }
+                }
+
 
             }
             else if((speed.x < 0.1f && speed.x > -0.1f))
@@ -206,7 +264,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         if(invulnerability > 0.f && (int)(invulnerability/0.125f)%2 == 0)
             return;
 
-        batch.draw(currentFrame, getX() - getWidth()*0.5f - map.scrollX - (lookLeft ? 28 : 50), getY() - getHeight()*0.5f, 128, 128, 0, 0, 24, 24, lookLeft, true);
+        batch.draw(currentFrame, getX() - getWidth()*0.5f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight()*0.5f, 120, 120, 0, 0, 24, 24, lookLeft, true);
     }
 
     // Draw collision box
