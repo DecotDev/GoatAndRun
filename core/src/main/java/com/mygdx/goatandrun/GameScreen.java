@@ -255,7 +255,7 @@ public class GameScreen implements Screen {
         }
 
         // Complete level
-        if(goat.getX() >= tileMap.width * tileMap.TILE_SIZE)
+        if(goat.getX() >= (tileMap.width + 0) * tileMap.TILE_SIZE )
         {
             this.dispose();
             game.setScreen(new LevelCompleteScreen(game));

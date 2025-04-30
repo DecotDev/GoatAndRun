@@ -22,7 +22,7 @@ public class LoadingScreen implements Screen {
         // Add assets for loading
 
         // Tiles
-        for(int i = 1; i < 19; i++)
+        for(int i = 1; i < 22; i++)
             manager.load("tiles/"+i+".png", Texture.class);
 
         // Background image
@@ -96,7 +96,7 @@ public class LoadingScreen implements Screen {
 
         // Render step =============================================
         float currentLoadProgress = game.manager.getProgress();
-        if(currentLoadProgress > loadProgress + 0.05f)
+        if(currentLoadProgress > loadProgress || loadProgress == 0f)
         {
             loadProgress = currentLoadProgress;
 

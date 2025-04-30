@@ -83,7 +83,7 @@ public class TileMap {
             {
                 if(tiles[j][i] != 0)
                 {
-                    batch.draw(manager.get("tiles/"+tiles[j][i]+".png", Texture.class), TILE_SIZE * i - scrollX, TILE_SIZE * j, TILE_SIZE, TILE_SIZE, 0, 0, 128, 128, false, true);
+                    batch.draw(manager.get("tiles/"+tiles[j][i]+".png", Texture.class), TILE_SIZE * i - scrollX, TILE_SIZE * j, TILE_SIZE, TILE_SIZE, 0, 0, 32, 32, false, true);
                 }
             }
         batch.end();
