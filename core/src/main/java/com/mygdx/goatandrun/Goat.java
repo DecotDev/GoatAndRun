@@ -30,7 +30,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     public Goat(AssetManager manager)
     {
         //setSize(120, 120);
-        setBounds(400,160,72, 104);
+        setBounds(400,160,72, 94);
         this.manager = manager;
         currentFrame = manager.get("goat/Idle (1).png", Texture.class);
         invulnerability = 0.f;
@@ -264,7 +264,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         if(invulnerability > 0.f && (int)(invulnerability/0.125f)%2 == 0)
             return;
 
-        batch.draw(currentFrame, getX() - getWidth()*0.5f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight()*0.5f, 120, 120, 0, 0, 24, 24, lookLeft, true);
+        batch.draw(currentFrame, getX() - getWidth()*0.5f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight()*0.5f, 120, 120, 0, 2, 24, 24, lookLeft, true);
     }
 
     // Draw collision box
