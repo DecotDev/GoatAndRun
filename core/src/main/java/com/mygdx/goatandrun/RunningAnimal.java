@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class RunningAnimal extends GameEntity {
 
-    static final float GRAVITY = 980.f;
+    static final float GRAVITY = 1260.f;//980.f;
 
     protected boolean falling;
     protected boolean dead;

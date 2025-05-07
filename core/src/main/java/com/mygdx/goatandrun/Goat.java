@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Goat extends com.mygdx.goatandrun.RunningAnimal {
-    static final float JUMP_IMPULSE = -360f; //-600f;
+    static final float JUMP_IMPULSE = -580; //-420; //-360f; //-600f;
     static final float RUN_SPEED = 300f;
-    static final float AIR_RUN_SPEED = 220f;
+    static final float AIR_RUN_SPEED = 240f;
     static final float BRAKE_SPEED = 1500f;
-    static final float AIR_BRAKE_SPEED = 380f;
+    static final float AIR_BRAKE_SPEED = 420f;
     static final float STOP_SPEED = 50f;
     static final float AIR_STOP_SPEED = 60f;
     static final float RUN_ACCELERATION = 1800f;
@@ -30,7 +30,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     public Goat(AssetManager manager)
     {
         //setSize(120, 120);
-        setBounds(400,160,72, 94);
+        setBounds(400,160,42, 94);
         this.manager = manager;
         currentFrame = manager.get("goat/Idle (1).png", Texture.class);
         invulnerability = 0.f;
@@ -264,7 +264,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         if(invulnerability > 0.f && (int)(invulnerability/0.125f)%2 == 0)
             return;
 
-        batch.draw(currentFrame, getX() - getWidth()*0.5f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight()*0.5f, 120, 120, 0, 2, 24, 24, lookLeft, true);
+        batch.draw(currentFrame, getX() - getWidth()*0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight()*0.5f, 120, 120, 0, 2, 24, 24, lookLeft, true);
     }
 
     // Draw collision box
