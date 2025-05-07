@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Goat extends com.mygdx.goatandrun.RunningAnimal {
-    static final float JUMP_IMPULSE = -600f;
+    static final float JUMP_IMPULSE = -360f; //-600f;
     static final float RUN_SPEED = 300f;
     static final float AIR_RUN_SPEED = 220f;
     static final float BRAKE_SPEED = 1500f;

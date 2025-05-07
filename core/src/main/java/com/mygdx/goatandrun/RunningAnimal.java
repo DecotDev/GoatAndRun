@@ -78,8 +78,8 @@ public class RunningAnimal extends GameEntity {
         }
 
         if(     speed.x > 0 && (
-            map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() - getHeight()*0.25f)) ||
-                map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.25f)) ||
+            map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() - getHeight()*0.4f)) ||
+                map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.4f)) ||
                     map.isSolid((int)(getX() + getWidth()/2 + delta * speed.x), (int)(getY() + 0))
         )
         )
@@ -87,8 +87,8 @@ public class RunningAnimal extends GameEntity {
             speed.x = 0;
         }
         if(     speed.x < 0 && (
-            map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() - getHeight()*0.25f)) ||
-                map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.25f)) ||
+            map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() - getHeight()*0.4f)) ||
+                map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() + getHeight()*0.4f)) ||
                     map.isSolid((int)(getX() - getWidth()/2 + delta * speed.x), (int)(getY() + 0))
         )
         )
