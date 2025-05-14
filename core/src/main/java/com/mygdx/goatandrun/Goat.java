@@ -36,10 +36,12 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     }
 
     private void accelerate(float delta) {
-        if (speed.x < 250) {
-            speed.x += (RUN_ACCELERATION * 2.3f) * delta;
+        if (speed.x < 125) {
+            speed.x += (RUN_ACCELERATION * 5) * delta;
+        }else if (speed.x < 250) {
+            speed.x += (RUN_ACCELERATION * 2f) * delta;
         } else if (speed.x < 400) {
-            speed.x += (RUN_ACCELERATION * 0.034f) * delta ;
+            speed.x += (RUN_ACCELERATION * 0.038f) * delta ;
         } else if (speed.x < 1600000) {
             speed.x += (RUN_ACCELERATION * 0.005f) * delta;
 
