@@ -14,7 +14,7 @@
       y: 360
       width: 80
       height: 80,
-      action: Left
+      action: Down
       image_on: "gui/Left-on.png",
       image_off: "gui/Left-off.png"
     },

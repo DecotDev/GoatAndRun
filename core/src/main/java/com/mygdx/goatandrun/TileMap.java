@@ -9,7 +9,7 @@ import com.mygdx.goatandrun.jsonloaders.LevelJson;
 
 public class TileMap {
 
-    public static final int TILE_SIZE = 64;
+    public static final int TILE_SIZE = 54;
     int width;
     int height;
     byte tiles[][];

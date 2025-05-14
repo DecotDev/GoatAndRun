@@ -126,11 +126,12 @@ public class GameScreen implements Screen {
         tileMap.render();
 
         // Bounding box draw =======================================
+        /*
         goat.drawDebug(game.shapeRenderer);
         for (int i = 0; i < enemies.size(); i++)
             enemies.get(i).drawDebug(game.shapeRenderer);
 
-
+        */
         // =========================================================
 
         // Draw stage: player, enemies and collectibles

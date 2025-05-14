@@ -30,7 +30,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     public Goat(AssetManager manager)
     {
         //setSize(120, 120);
-        setBounds(400,160,42, 94);
+        setBounds(400,160,42, 86);
         this.manager = manager;
         currentFrame = manager.get("goat/Idle (1).png", Texture.class);
         invulnerability = 0.f;
@@ -42,6 +42,12 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        // COnstant right move
+        speed.x += RUN_ACCELERATION * delta;
+        if (speed.x > RUN_SPEED) {
+            speed.x = RUN_SPEED;
+        }
 
         // Fall too low
         if(getY() > map.height * TileMap.TILE_SIZE)
@@ -94,6 +100,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                 if (joypad.isPressed("Right"))
                 {
                     // Accelerate right
+                    /*
                     lookLeft = false;
                     speed.x += AIR_RUN_ACCELERATION * delta;
                     if (speed.x > AIR_RUN_SPEED) {
@@ -103,6 +110,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                             speed.x = AIR_RUN_SPEED;
                         }
                     }
+                    */
                 }
                 else if (joypad.isPressed("Left"))
                 {
@@ -153,6 +161,14 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                 currentFrame = manager.get("goat/Idle ("+(int)(animationFrame+1)+").png", Texture.class);
 
             }
+            else if(crouched)
+            {
+                // Crouch Walk
+                animationFrame += 10 * delta;
+                if (animationFrame >= 5.f) animationFrame -= 5.f;
+                currentFrame = manager.get("goat/Crouch Walk ("+(int)(animationFrame+1)+").png", Texture.class);
+
+            }
             else
             {
                 // Walk
@@ -181,17 +197,21 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                         speed.x = RUN_SPEED;
                     }
                 }
-                else if (joypad.isPressed("Left"))
+                else if (joypad.isPressed("Down"))
                 {
                     // Accelerate left
-                    lookLeft = true;
-                    speed.x -= RUN_ACCELERATION * delta;
+
+                    //lookLeft = true;
+                    crouched = true;
+                    //speed.x -= RUN_ACCELERATION * delta;
                     if (speed.x < -RUN_SPEED) {
                         speed.x = -RUN_SPEED;
                     }
                 }
                 else
                 {
+                    // Stop crouching
+                    crouched = false;
                     // Reduce speed and stop
                     if(speed.x < 0f)
                     {
@@ -264,7 +284,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         if(invulnerability > 0.f && (int)(invulnerability/0.125f)%2 == 0)
             return;
 
-        batch.draw(currentFrame, getX() - getWidth()*0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight()*0.5f, 120, 120, 0, 2, 24, 24, lookLeft, true);
+        batch.draw(currentFrame, getX() - getWidth()*0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight()*0.6f, 120, 120, 0, 2, 24, 24, lookLeft, true);
     }
 
     // Draw collision box

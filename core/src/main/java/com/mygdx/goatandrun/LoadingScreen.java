@@ -41,7 +41,7 @@ public class LoadingScreen implements Screen {
         manager.load("gui/Pause-on.png", Texture.class);
 
 
-        // Player
+        // Goat
         for (int i = 0; i < 4; i++)
         {
             manager.load("goat/Idle (" +(i+1)+").png", Texture.class);
@@ -57,6 +57,10 @@ public class LoadingScreen implements Screen {
         for (int i = 0; i < 4; i++)
         {
             manager.load("goat/Hurt (" +(i+1)+").png", Texture.class);
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            manager.load("goat/Crouch Walk (" +(i+1)+").png", Texture.class);
         }
 
         //Dino
