@@ -7,6 +7,8 @@ public class RunningAnimal extends GameEntity {
 
     static final float GRAVITY = 1260.f;//980.f;
 
+    boolean fast_fall = false;
+
     protected boolean falling;
     protected boolean dead;
     protected boolean lookLeft;
@@ -42,6 +44,11 @@ public class RunningAnimal extends GameEntity {
                     speed.y = 0;
                     setY(nearestFloor3 - getHeight() / 2);
                 }
+                else if (fast_fall)
+                {
+                    // Keep falling
+                    speed.y += delta * GRAVITY * 2f;
+                }
                 else
                 {
                     // Keep falling
@@ -58,11 +65,21 @@ public class RunningAnimal extends GameEntity {
                 {
                     speed.y = -speed.y;
                 }
+                else if (fast_fall)
+                {
+                    // Keep falling
+                    speed.y += delta * GRAVITY * 1.7f;
+                }
                 else
                 {
                     // Keep falling
                     speed.y += delta * GRAVITY;
                 }
+            }
+            else if (fast_fall)
+            {
+                // Keep falling
+                speed.y += delta * GRAVITY * 1.7f;
             }
             else
             {
