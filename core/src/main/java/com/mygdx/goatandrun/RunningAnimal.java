@@ -13,6 +13,7 @@ public class RunningAnimal extends GameEntity {
     protected boolean dead;
     protected boolean lookLeft;
     protected boolean crouched;
+    protected boolean previousCrouch;
 
     public RunningAnimal()
     {

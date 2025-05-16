@@ -19,6 +19,13 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     static final float AIR_RUN_ACCELERATION = 160f;//150f;//600f;
     static final float INVULNERABILITY_DURATION = 20f;
 
+    private static final float STAND_WIDTH = 42f;
+    private static final float STAND_HEIGHT = 86f;
+
+    private static final float CROUCH_WIDTH = 42f;
+    private static final float CROUCH_HEIGHT = 48f; // smaller height when crouched
+    private float bottomY;
+
     AssetManager manager;
     PawLayout joypad;
 
@@ -29,10 +36,11 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
 
     public Goat(AssetManager manager) {
         //setSize(120, 120);
-        setBounds(400, 160, 42, 86);
+        setBounds(400, 120, 42, 86);
         this.manager = manager;
         currentFrame = manager.get("goat/Idle (1).png", Texture.class);
         invulnerability = 0.f;
+        bottomY = getY() - getHeight() / 2f; // store bottom
     }
 
     private void accelerate(float delta) {
@@ -49,6 +57,24 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         System.out.println(speed.x);
     }
 
+    /*private void updateBounds() {
+        float bottomY = getY() - getHeight() * 0.5f; // preserve current bottom
+        float width = crouched ? CROUCH_WIDTH : STAND_WIDTH;
+        float height = crouched ? CROUCH_HEIGHT : STAND_HEIGHT;
+
+        // Set bounds with new height, keeping bottomY fixed
+        setBounds(getX(), bottomY + height / 2f, width, height);
+    }*/
+    private void updateBounds() {
+        if (crouched) {
+            setBounds(getX(), getY() + 18, 42, CROUCH_HEIGHT);
+        } else if (previousCrouch) {
+            setBounds(getX(), getY() - 18, 42, STAND_HEIGHT);
+        } else {
+            setBounds(getX(), getY(), 42, STAND_HEIGHT);
+        }
+    }
+
     public void setJoypad(PawLayout joypad) {
         this.joypad = joypad;
     }
@@ -56,7 +82,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        previousCrouch = crouched;
         // Constant right move
         accelerate(delta);
         /*speed.x += RUN_ACCELERATION * delta;
@@ -101,7 +127,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                 currentFrame = manager.get("goat/Jump (" + (int) (animationFrame + 1) + ").png", Texture.class);
 
                 //Air constant movement
-                accelerate(delta);
+                //accelerate(delta);
                 /*speed.x += AIR_RUN_ACCELERATION * delta;
                 if (speed.x > AIR_RUN_SPEED) {
                     if (speed.x > RUN_SPEED) {
@@ -226,6 +252,9 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                     }*/
                 }
             }
+            if (crouched != previousCrouch) {
+                updateBounds();
+            }
         }
     }
 
@@ -259,8 +288,20 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
 
         // Blink effect when invulnerable
         if (invulnerability > 0.f && (int) (invulnerability / 0.125f) % 2 == 0) return;
+        if (crouched) {
+            batch.draw(currentFrame, getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight() * 1.46f, 120, 120, 0, 2, 24, 24, lookLeft, true);
 
-        batch.draw(currentFrame, getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight() * 0.6f, 120, 120, 0, 2, 24, 24, lookLeft, true);
+        //} else if (previousCrouch) {
+        //    batch.draw(currentFrame, getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight() * 1.4f, 120, 120, 0, 2, 24, 24, lookLeft, true);
+
+        }
+        else {
+            batch.draw(currentFrame, getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight() * 0.6f, 120, 120, 0, 2, 24, 24, lookLeft, true);
+        }
+            /*float spriteDrawX = getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22);
+        float spriteDrawY = (getY() - getHeight() * 0.5f); // align to bottom of collision shape
+        batch.draw(currentFrame, spriteDrawX, spriteDrawY, 120, 120, 0, 2, 24, 24, lookLeft, true);*/
+
     }
 
     // Draw collision box

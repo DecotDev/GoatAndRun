@@ -126,12 +126,12 @@ public class GameScreen implements Screen {
         tileMap.render();
 
         // Bounding box draw =======================================
-        /*
+
         goat.drawDebug(game.shapeRenderer);
         for (int i = 0; i < enemies.size(); i++)
             enemies.get(i).drawDebug(game.shapeRenderer);
 
-        */
+
         // =========================================================
 
         // Draw stage: player, enemies and collectibles
@@ -147,7 +147,7 @@ public class GameScreen implements Screen {
             // Draw GUI
             joypad.render(game.batch, game.textBatch);
             game.textBatch.begin();
-            game.mediumFont.draw(game.textBatch, "Vides: " + game.lives, 40,460);
+            game.mediumFont.draw(game.textBatch, "Velocitat: " + (int)goat.speed.x, 40,460);
             // Debug touch pointers
             /*for(Integer i : joypad.pointers.keySet())
             {
