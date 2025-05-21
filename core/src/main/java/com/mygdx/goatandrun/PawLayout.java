@@ -161,7 +161,7 @@ public class PawLayout implements InputProcessor {
             if(b.text != null) {
                 GlyphLayout glyphLayout = new GlyphLayout();
                 glyphLayout.setText(font, b.text);
-                font.draw(textBatch, glyphLayout, b.rect.x + (b.rect.width - glyphLayout.width) / 2f, 480 - (b.rect.y + (b.rect.height - glyphLayout.height) / 2f));
+                font.draw(textBatch, glyphLayout, b.rect.x + (b.rect.width - glyphLayout.width) / 2f, 480 - (b.rect.y + (b.rect.height - glyphLayout.height*2.6f) / 2f));
             }
         }
         textBatch.end();

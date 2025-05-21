@@ -34,7 +34,7 @@ public class GoatAndRun extends Game {
 
         // Fonts
         FreeTypeFontGenerator generator = new
-            FreeTypeFontGenerator(Gdx.files.internal("Dogfiles.ttf"));
+            FreeTypeFontGenerator(Gdx.files.internal("upheavtt.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter params = new
             FreeTypeFontGenerator.FreeTypeFontParameter();
 
@@ -44,13 +44,13 @@ public class GoatAndRun extends Game {
         params.color = Color.WHITE;
         smallFont = generator.generateFont(params); // font size 22 pixels
 
-        params.size = 42;
+        params.size = 46;//42;
         params.borderWidth = 4;
         params.borderColor = Color.BLACK;
         params.color = Color.WHITE;
         mediumFont = generator.generateFont(params); // font size 22 pixels
 
-        params.size = 64;
+        params.size = 82;
         params.borderWidth = 8;
         params.color = Color.RED;
         bigFont = generator.generateFont(params); // font size 22 pixels

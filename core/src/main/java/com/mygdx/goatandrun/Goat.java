@@ -51,8 +51,12 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         } else if (speed.x < 400) {
             speed.x += (RUN_ACCELERATION * 0.038f) * delta ;
         } else if (speed.x < 1600000) {
-            speed.x += (RUN_ACCELERATION * 0.005f) * delta;
+            speed.x += (RUN_ACCELERATION * 0.02f) * delta;
 
+        }
+        if (crouched && !falling && speed.x > 250 ) {
+            speed.x += (RUN_ACCELERATION *  0.1f) * delta;
+            //speed.x += (RUN_ACCELERATION *  -10000f) * delta;
         }
         System.out.println(speed.x);
     }
@@ -206,7 +210,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
 
             }
 
-            if (!falling && joypad.consumePush("Jump")) {
+            if (!falling && joypad.isPressed("Jump")) {
                 // Jump
                 jump(1.f);
                 manager.get("sound/jump.wav", Sound.class).play();

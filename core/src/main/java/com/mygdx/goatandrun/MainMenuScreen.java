@@ -32,8 +32,8 @@ public class MainMenuScreen implements Screen
         game.batch.end();
 
         game.textBatch.begin();
-        game.bigFont.draw(game.textBatch,"SUPER PUIG BROS.", 30, 480 - 60);
-        game.smallFont.draw(game.textBatch,"(c) Puig Castellar 2025", 160, 480 - 420);
+        game.bigFont.draw(game.textBatch,"GOAT AND RUN", 76, 480 - 60);
+        game.smallFont.draw(game.textBatch,"(c) Puig Castellar 2025", 10, 480 - 450);
         game.textBatch.end();
 
         mainMenu.render(game.batch, game.textBatch);
@@ -42,7 +42,7 @@ public class MainMenuScreen implements Screen
         // Start the game!
         if(mainMenu.consumeRelease("Start"))
         {
-            game.lives = 3;
+            game.lives = 999;
             game.setScreen(new GameScreen(game));
             this.dispose();
         }
