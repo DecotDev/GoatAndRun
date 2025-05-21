@@ -15,17 +15,8 @@
       width: 80
       height: 80,
       action: Down
-      image_on: "gui/Left-on.png",
-      image_off: "gui/Left-off.png"
-    },
-    {
-      x: 160
-      y: 360
-      width: 80
-      height: 80
-      action: Right
-      image_on: "gui/Right-on.png",
-      image_off: "gui/Right-off.png"
+      image_on: "gui/Down-on.png",
+      image_off: "gui/Down-off.png"
     },
     {
       x: 660

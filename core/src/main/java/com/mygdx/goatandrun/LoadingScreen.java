@@ -31,8 +31,8 @@ public class LoadingScreen implements Screen {
         //GUI
         manager.load("gui/Button-off.png", Texture.class);
         manager.load("gui/Button-on.png", Texture.class);
-        manager.load("gui/Left-off.png", Texture.class);
-        manager.load("gui/Left-on.png", Texture.class);
+        manager.load("gui/Down-off.png", Texture.class);
+        manager.load("gui/Down-on.png", Texture.class);
         manager.load("gui/Right-off.png", Texture.class);
         manager.load("gui/Right-on.png", Texture.class);
         manager.load("gui/Jump-off.png", Texture.class);
