@@ -28,7 +28,7 @@ public class MainMenuScreen implements Screen
         game.textBatch.setProjectionMatrix(game.textCamera.combined);
 
         game.batch.begin();
-        game.batch.draw(game.manager.get("BG.png", Texture.class), 0, 0, 800, 480, 0,0, 1000, 750, false, true);
+        game.batch.draw(game.manager.get("BG.png", Texture.class), 0, 0, 800, 480, 0,0, 1376, 400, false, true);
         game.batch.end();
 
         game.textBatch.begin();

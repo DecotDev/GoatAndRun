@@ -14,6 +14,7 @@ public class RunningAnimal extends GameEntity {
     protected boolean lookLeft;
     protected boolean crouched;
     protected boolean previousCrouch;
+    protected float old_speed_x;
 
     public RunningAnimal()
     {

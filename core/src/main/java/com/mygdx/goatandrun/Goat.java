@@ -41,9 +41,16 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         currentFrame = manager.get("goat/Idle (1).png", Texture.class);
         invulnerability = 0.f;
         bottomY = getY() - getHeight() / 2f; // store bottom
+        old_speed_x = 100;
+        speed.x = 25;
     }
 
     private void accelerate(float delta) {
+        //Muerte por stop
+        if (speed.x < 20) {
+            kill();
+        }
+        speed.x = old_speed_x;
         if (speed.x < 125) {
             speed.x += (RUN_ACCELERATION * 5) * delta;
         }else if (speed.x < 250) {
@@ -54,21 +61,14 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
             speed.x += (RUN_ACCELERATION * 0.02f) * delta;
 
         }
+        old_speed_x = speed.x;
         if (crouched && !falling && speed.x > 250 ) {
-            speed.x += (RUN_ACCELERATION *  0.1f) * delta;
-            //speed.x += (RUN_ACCELERATION *  -10000f) * delta;
+            old_speed_x = speed.x;
+            speed.x += 6000 * delta;
         }
         System.out.println(speed.x);
     }
-
-    /*private void updateBounds() {
-        float bottomY = getY() - getHeight() * 0.5f; // preserve current bottom
-        float width = crouched ? CROUCH_WIDTH : STAND_WIDTH;
-        float height = crouched ? CROUCH_HEIGHT : STAND_HEIGHT;
-
-        // Set bounds with new height, keeping bottomY fixed
-        setBounds(getX(), bottomY + height / 2f, width, height);
-    }*/
+    //Ajustar colisiones y posicion adaptada a la colisión
     private void updateBounds() {
         if (crouched) {
             setBounds(getX(), getY() + 18, 42, CROUCH_HEIGHT);
@@ -89,11 +89,8 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         previousCrouch = crouched;
         // Constant right move
         accelerate(delta);
-        /*speed.x += RUN_ACCELERATION * delta;
-        if (speed.x > RUN_SPEED) {
-            speed.x = RUN_SPEED;
-        }*/
 
+        System.out.println("Goat Y: " + getY() + " KILL: " +  (map.height * TileMap.TILE_SIZE));
         // Fall too low
         if (getY() > map.height * TileMap.TILE_SIZE) {
             kill();
@@ -130,31 +127,10 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                 }
                 currentFrame = manager.get("goat/Jump (" + (int) (animationFrame + 1) + ").png", Texture.class);
 
-                //Air constant movement
-                //accelerate(delta);
-                /*speed.x += AIR_RUN_ACCELERATION * delta;
-                if (speed.x > AIR_RUN_SPEED) {
-                    if (speed.x > RUN_SPEED) {
-                        speed.x = RUN_SPEED;
-                    } else {
-                        speed.x = AIR_RUN_SPEED;
-                    }
-                }*/
 
                 //Air control
                 if (joypad.isPressed("Right")) {
-                    // Turbo?
-                    /*
-                    lookLeft = false;
-                    speed.x += AIR_RUN_ACCELERATION * delta;
-                    if (speed.x > AIR_RUN_SPEED) {
-                        if (speed.x > RUN_SPEED) {
-                            speed.x = RUN_SPEED;
-                        } else {
-                            speed.x = AIR_RUN_SPEED;
-                        }
-                    }
-                    */
+
 
                 } else if (joypad.isPressed("Down")) {
                     //modificate gravity
@@ -166,27 +142,7 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                 else {
                     //Desactivate fast fall
                     fast_fall = false;
-                    // Reduce speed and stop
-                    /*if(speed.x < 0f)
-                    {
-                        if(speed.x < -AIR_STOP_SPEED) {
-                            speed.x += delta * AIR_BRAKE_SPEED;
-                        }
-                        else
-                        {
-                            speed.x = 0f;
-                        }
-                    }
-                    else if (speed.x > 0f)
-                    {
-                        if(speed.x > AIR_STOP_SPEED) {
-                            speed.x -= delta * AIR_BRAKE_SPEED;
-                        }
-                        else
-                        {
-                            speed.x = 0f;
-                        }
-                    }*/
+
                 }
 
 
@@ -213,18 +169,13 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
             if (!falling && joypad.isPressed("Jump")) {
                 // Jump
                 jump(1.f);
-                manager.get("sound/jump.wav", Sound.class).play();
+                manager.get("sound/jump.mp3", Sound.class).play();
             }
 
             if (!falling) {
                 // On the ground
                 if (joypad.isPressed("Right")) {
-                    // Accelerate right
-                    /*lookLeft = false;
-                    speed.x += RUN_ACCELERATION * delta;
-                    if (speed.x > RUN_SPEED) {
-                        speed.x = RUN_SPEED;
-                    }*/
+
                 } else if (joypad.isPressed("Down")) {
                     // Crouch
                     crouched = true;
@@ -232,28 +183,6 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
                 } else {
                     // Stop crouching
                     crouched = false;
-                    // Reduce speed and stop
-                    /*
-                    if(speed.x < 0f)
-                    {
-                        if(speed.x < -STOP_SPEED) {
-                            speed.x += delta * BRAKE_SPEED;
-                        }
-                        else
-                        {
-                            speed.x = 0f;
-                        }
-                    }
-                    else if (speed.x > 0f)
-                    {
-                        if(speed.x > STOP_SPEED) {
-                            speed.x -= delta * BRAKE_SPEED;
-                        }
-                        else
-                        {
-                            speed.x = 0f;
-                        }
-                    }*/
                 }
             }
             if (crouched != previousCrouch) {
@@ -295,16 +224,10 @@ public class Goat extends com.mygdx.goatandrun.RunningAnimal {
         if (crouched) {
             batch.draw(currentFrame, getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight() * 1.46f, 120, 120, 0, 2, 24, 24, lookLeft, true);
 
-        //} else if (previousCrouch) {
-        //    batch.draw(currentFrame, getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight() * 1.4f, 120, 120, 0, 2, 24, 24, lookLeft, true);
-
         }
         else {
             batch.draw(currentFrame, getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22), getY() - getHeight() * 0.6f, 120, 120, 0, 2, 24, 24, lookLeft, true);
         }
-            /*float spriteDrawX = getX() - getWidth() * 0.85f - map.scrollX - (lookLeft ? 26 : 22);
-        float spriteDrawY = (getY() - getHeight() * 0.5f); // align to bottom of collision shape
-        batch.draw(currentFrame, spriteDrawX, spriteDrawY, 120, 120, 0, 2, 24, 24, lookLeft, true);*/
 
     }
 

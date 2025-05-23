@@ -71,8 +71,8 @@ public class TileMap {
 
         // Parallax scroll
         int bgWidth = bgTexture.getWidth();
-        int bgHeight = bgTexture.getHeight();
-        int scrollXPos = 0 - ((scrollX/2) % bgWidth);
+        int bgHeight = bgTexture.getHeight()+ 200;
+        int scrollXPos = -0 - ((scrollX/2) % bgWidth);
 
         batch.draw(bgTexture, scrollXPos, 0, bgWidth, bgHeight, 0, 0, bgWidth, bgHeight, false, true);
         batch.draw(bgTexture, scrollXPos + bgWidth, 0, bgWidth, bgHeight, 0, 0, bgWidth, bgHeight, false, true);

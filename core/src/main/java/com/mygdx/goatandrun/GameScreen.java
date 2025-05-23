@@ -147,7 +147,7 @@ public class GameScreen implements Screen {
             // Draw GUI
             joypad.render(game.batch, game.textBatch);
             game.textBatch.begin();
-            game.mediumFont.draw(game.textBatch, "Velocitat: " + (int)goat.speed.x, 40,460);
+            game.mediumFont.draw(game.textBatch, "Speed: " + (int)goat.speed.x, 20,460);
             // Debug touch pointers
             /*for(Integer i : joypad.pointers.keySet())
             {
@@ -244,7 +244,7 @@ public class GameScreen implements Screen {
         }
 
         // Lose life
-        if (goat.isDead() && goat.getAnimationFrame() >= 25.f) {
+        if (goat.isDead() && goat.getAnimationFrame() >= 10.f) {
             game.lives--;
             if (game.lives <= 0) {
                 this.dispose();

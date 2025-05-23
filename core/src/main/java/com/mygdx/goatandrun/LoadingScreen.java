@@ -83,9 +83,9 @@ public class LoadingScreen implements Screen {
         manager.load("sound/music.mp3", Music.class);
         manager.load("sound/loselife.wav", Sound.class);
         manager.load("sound/kill.wav", Sound.class);
-        manager.load("sound/jump.wav", Sound.class);
+        manager.load("sound/jump.mp3", Sound.class);
         manager.load("sound/powerup.wav", Sound.class);
-        manager.load("sound/levelcomplete.wav", Sound.class);
+        manager.load("sound/levelcomplete.mp3", Sound.class);
 
         loadProgress = 0f;
     }
@@ -113,16 +113,16 @@ public class LoadingScreen implements Screen {
 
             // Progress bar
             game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            game.shapeRenderer.setColor(Color.YELLOW);
+            game.shapeRenderer.setColor(Color.GRAY);
             game.shapeRenderer.rect(90, 290, 620, 100);
             game.shapeRenderer.setColor(Color.BLACK);
             game.shapeRenderer.rect(100, 300, 600, 80);
-            game.shapeRenderer.setColor(Color.ORANGE);
+            game.shapeRenderer.setColor(Color.RED);
             game.shapeRenderer.rect(110, 310, 580 * loadProgress, 60);
             game.shapeRenderer.end();
 
             game.textBatch.begin();
-            game.bigFont.draw(game.textBatch, "CARREGANT...", 120, 340);
+            game.bigFont.draw(game.textBatch, "LOADING GOAT...", 40, 340);
             game.mediumFont.draw(game.textBatch, (int) (loadProgress * 100.f) + "%", 360, 160);
             game.textBatch.end();
 
